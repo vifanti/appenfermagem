@@ -7,8 +7,6 @@ export const Container = styled.View`
 `;
 
 export const BackButton = styled(RectButton)`
-  border: 1px;
-  border-color: #000;
   margin-top: 10px;
   width: 52px;
   height: 52px;
