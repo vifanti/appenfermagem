@@ -23,7 +23,7 @@ export const Container = styled.View<ContainerProps>`
   width: 100%;
   height: 60px;
 
-  flex: 1;
+  /* flex: 1; */
   justify-content: center;
   align-items: center;
 `;

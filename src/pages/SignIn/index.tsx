@@ -3,7 +3,9 @@ import { useNavigation } from '@react-navigation/native';
 
 import Button from '../../components/Button';
 
-import { Container, Title, Footer } from './styles';
+import logoImg from '../../assets/img_banner.png';
+
+import { Container, Image, Form, Title } from './styles';
 
 // O component foi declarado dessa forma por é mais fácil de
 // definir a tipagem de uma variável e fica menos verboso
@@ -12,14 +14,15 @@ const SignIn: React.FC = () => {
 
   return (
     <>
+      <Image source={logoImg} />
       <Container>
-        <Title>Enfermagem</Title>
+        <Form>
+          <Title>Insira suas informações</Title>
+          <Button onPress={() => navigation.navigate('LoginConectw')}>
+            Logar com Conecte/w
+          </Button>
+        </Form>
       </Container>
-      <Footer>
-        <Button onPress={() => navigation.navigate('LoginConectw')}>
-          Logar com Conecte/w
-        </Button>
-      </Footer>
     </>
   );
 };
