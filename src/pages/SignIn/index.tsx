@@ -16,7 +16,7 @@ const SignIn: React.FC = () => {
         <Title>Enfermagem</Title>
       </Container>
       <Footer>
-        <Button onPress={() => navigation.navigate('WebViewScreen')}>
+        <Button onPress={() => navigation.navigate('LoginConectw')}>
           Logar com Conecte/w
         </Button>
       </Footer>

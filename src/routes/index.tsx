@@ -1,35 +1,30 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { View, ActivityIndicator } from 'react-native';
 
-import SignIn from '../pages/SignIn';
-import WebViewScreen from '../pages/WebViewScreen';
+import AuthRoutes from './auth.routes';
+import AppRoutes from './app.routes';
 
-const Auth = createStackNavigator();
+import { useAuth } from '../hooks/auth';
 
-const AuthRoutes: React.FC = () => {
-  return (
-    <Auth.Navigator
-      screenOptions={{
-        cardStyle: { backgroundColor: '#fff' },
-      }}
-    >
-      <Auth.Screen
-        name="SignIn"
-        component={SignIn}
-        options={{ headerShown: false }}
-      />
-      <Auth.Screen
-        name="WebViewScreen"
-        component={WebViewScreen}
-        options={{
-          headerStyle: { backgroundColor: '#e01111' },
-          headerTintColor: '#fff',
-          headerTitleAlign: 'center',
-          headerTitle: 'Login Único',
+const Routes: React.FC = () => {
+  const { tokenData, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#fff',
         }}
-      />
-    </Auth.Navigator>
-  );
+      >
+        <ActivityIndicator size="large" color="#e01111" />
+      </View>
+    );
+  }
+
+  return tokenData ? <AppRoutes /> : <AuthRoutes />;
 };
 
-export default AuthRoutes;
+export default Routes;

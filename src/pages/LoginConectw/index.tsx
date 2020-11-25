@@ -1,14 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
+// import { Alert } from 'react-native';
 import { WebView, WebViewNavigation } from 'react-native-webview';
-import querystring from 'querystring';
+import querystring from 'query-string';
 import Url from 'url';
 
-import { Container, Loading } from './Styles';
+import { Container, Loading } from './styles';
 import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
-const WebViewScreen: React.FC = () => {
+const LoginConectw: React.FC = () => {
   const [uri, setUri] = useState('');
-  const [code, setCode] = useState<string | string[]>();
+
+  const { updateToken } = useAuth();
 
   useEffect(() => {
     const { baseUrl, clientId, responseType, scope, redirectUri, state } = {
@@ -28,26 +31,27 @@ const WebViewScreen: React.FC = () => {
     );
   }, []);
 
-  useEffect(() => {
-    if (!code) return;
+  const navigationStateChange = useCallback(
+    (event: WebViewNavigation) => {
+      const parsedUrl = Url.parse(event.url);
 
-    api.post('/login', { code }).then(response => {
-      console.log(response.data);
-    });
-  }, [code]);
-
-  const navigationStateChange = useCallback((event: WebViewNavigation) => {
-    const parsedUrl = Url.parse(event.url);
-
-    if (parsedUrl.search) {
-      const searchParams = parsedUrl.search.replace('?', '');
-      const params = querystring.parse(searchParams);
-
-      if (params.code) {
-        setCode(params.code);
+      if (!parsedUrl.search) {
+        return;
       }
-    }
-  }, []);
+
+      const searchParams = parsedUrl.search.replace('?', '');
+      const { code } = querystring.parse(searchParams);
+
+      if (!code) {
+        return;
+      }
+
+      api.post('/login', { code }).then(async response => {
+        await updateToken(response.data);
+      });
+    },
+    [updateToken],
+  );
 
   return (
     <Container>
@@ -61,4 +65,4 @@ const WebViewScreen: React.FC = () => {
   );
 };
 
-export default WebViewScreen;
+export default LoginConectw;

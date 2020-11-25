@@ -40,7 +40,6 @@ export const Button = styled(RectButton)`
 `;
 
 export const ButtonText = styled.Text<Textprops>`
-  font-family: 'Comfortaa-Bold';
   font-size: 20px;
   color: #fff;
   text-align: center;
