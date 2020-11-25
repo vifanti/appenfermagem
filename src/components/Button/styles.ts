@@ -8,8 +8,6 @@ interface ContainerProps {
 type Textprops = ContainerProps;
 
 export const Container = styled.View<ContainerProps>`
-  border: 4px;
-  border-color: #000;
   border-radius: 10px;
 
   background: #000;
@@ -17,6 +15,8 @@ export const Container = styled.View<ContainerProps>`
   ${props =>
     props.white &&
     css`
+      border: 4px;
+      border-color: #000;
       background: #fff;
     `};
 
@@ -32,6 +32,9 @@ export const Button = styled(RectButton)`
   width: 100%;
   height: 100%;
 
+  /* border: 50px;
+  border-color: #000; */
+
   justify-content: center;
   align-items: center;
 `;
@@ -40,10 +43,11 @@ export const ButtonText = styled.Text<Textprops>`
   font-family: 'Comfortaa-Bold';
   font-size: 20px;
   color: #fff;
+  text-align: center;
 
   ${props =>
     props.white &&
     css`
       color: #000;
-    `}/* text-transform: uppercase; */
+    `}; /* text-transform: uppercase; */
 `;
