@@ -13,9 +13,10 @@ interface ButtonProps extends ViewProps, Omit<RectButtonProperties, 'hitSlop'> {
 const ButtonComponent: React.FC<ButtonProps> = ({
   children,
   white,
+  margin,
   ...rest
 }) => (
-  <Container white={white}>
+  <Container white={white} margin={margin}>
     <Button rippleColor="gray" {...rest}>
       <ButtonText white={white}>{children}</ButtonText>
     </Button>

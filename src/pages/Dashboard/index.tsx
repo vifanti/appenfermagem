@@ -8,7 +8,7 @@ const Dashboard: React.FC = () => {
   const { signOut } = useAuth();
 
   return (
-    <Container>
+    <>
       <BackButton onPress={signOut}>
         <Icon
           name="log-out"
@@ -16,8 +16,10 @@ const Dashboard: React.FC = () => {
           style={{ transform: [{ rotate: '180deg' }] }}
         />
       </BackButton>
-      <Title>Dashboard</Title>
-    </Container>
+      <Container>
+        <Title>Dashboard</Title>
+      </Container>
+    </>
   );
 };
 

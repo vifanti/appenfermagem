@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { Overlay } from 'react-native-elements';
+import { ActivityIndicator } from 'react-native';
 
 interface ContainerProps {
   white?: boolean;
-  margin?: number;
 }
 
 type Textprops = ContainerProps;
@@ -47,4 +48,20 @@ export const ButtonText = styled.Text<Textprops>`
     css`
       color: #000;
     `}; /* text-transform: uppercase; */
+`;
+
+export const OverlayView = styled(Overlay)`
+  width: 200px;
+  margin: 100px;
+  padding: 100px;
+`;
+
+export const Loading = styled(ActivityIndicator).attrs({
+  color: '#000',
+  size: 'large',
+})`
+  flex: 1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 `;
